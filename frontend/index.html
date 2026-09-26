@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IR Vibe Music Search</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts (Kanit) -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Kanit', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 pb-16">
+
+    <!-- 1. Header / Navbar -->
+    <header class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-9 h-9 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                🎵
+            </div>
+            <span class="text-xl font-bold text-slate-900">IR Vibe<span class="text-orange-500">Music</span></span>
+        </div>
+        <div class="hidden sm:flex items-center gap-2 bg-gray-100 px-4 py-1.5 rounded-full text-xs text-gray-500 border border-gray-200">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-orange-500"></i>
+            <span>ระบบค้นหาเนื้อเพลงและศิลปินด้วย AI & IR</span>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 space-y-8">
+
+        <!-- 2. Hero Banner -->
+        <section class="relative bg-zinc-900 text-white rounded-3xl p-8 md:p-12 overflow-hidden shadow-xl">
+            <div class="relative z-10 max-w-xl space-y-4">
+                <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
+                    ค้นดี ฟีลดี <br>
+                    ตรงเป้าทุก<span class="text-orange-500">ตัวโน้ต</span>
+                </h1>
+                <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+                    บอกเราว่าเนื้อเพลงท่อนไหนติดอยู่ในหัวของคุณ แล้วระบบ AI & IR จะช่วยจับคู่เพลงที่ใช่ พร้อมบอกชื่อศิลปินและระดับความตรงกันให้ทันที
+                </p>
+                <a href="#searchSection" class="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-semibold transition text-sm">
+                    เริ่มค้นหาเลย
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+            <div class="absolute -right-10 -bottom-10 w-72 h-72 md:w-96 md:h-96 opacity-30 pointer-events-none">
+                <div class="w-full h-full rounded-full bg-orange-500 blur-3xl"></div>
+            </div>
+        </section>
+
+        <!-- 3. Category Grid -->
+        <section>
+            <h2 class="text-sm font-bold text-gray-700 mb-3">หมวดหมู่อยอดนิยม</h2>
+            <div class="grid grid-cols-3 sm:grid-cols-6 gap-3">
+                <button onclick="quickSearch('คิดถึง')" class="flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-2xl hover:border-orange-500 hover:shadow-md transition group">
+                    <div class="p-2 bg-orange-50 rounded-xl text-orange-500 mb-1 group-hover:bg-orange-500 group-hover:text-white transition">
+                        <i data-lucide="music" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600">เพลงฮิต</span>
+                </button>
+                <button onclick="quickSearch('อยากรู้')" class="flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-2xl hover:border-orange-500 hover:shadow-md transition group">
+                    <div class="p-2 bg-orange-50 rounded-xl text-orange-500 mb-1 group-hover:bg-orange-500 group-hover:text-white transition">
+                        <i data-lucide="heart-crack" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600">อกหัก</span>
+                </button>
+                <button onclick="quickSearch('พิง')" class="flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-2xl hover:border-orange-500 hover:shadow-md transition group">
+                    <div class="p-2 bg-orange-50 rounded-xl text-orange-500 mb-1 group-hover:bg-orange-500 group-hover:text-white transition">
+                        <i data-lucide="cloud-rain" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600">เหงาๆ</span>
+                </button>
+                <button onclick="quickSearch('รัก')" class="flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-2xl hover:border-orange-500 hover:shadow-md transition group">
+                    <div class="p-2 bg-orange-50 rounded-xl text-orange-500 mb-1 group-hover:bg-orange-500 group-hover:text-white transition">
+                        <i data-lucide="smile" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600">แอบรัก</span>
+                </button>
+                <button onclick="quickSearch('NONT')" class="flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-2xl hover:border-orange-500 hover:shadow-md transition group">
+                    <div class="p-2 bg-orange-50 rounded-xl text-orange-500 mb-1 group-hover:bg-orange-500 group-hover:text-white transition">
+                        <i data-lucide="mic" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600">ศิลปินดัง</span>
+                </button>
+                <button onclick="quickSearch('4EVE')" class="flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-2xl hover:border-orange-500 hover:shadow-md transition group">
+                    <div class="p-2 bg-orange-50 rounded-xl text-orange-500 mb-1 group-hover:bg-orange-500 group-hover:text-white transition">
+                        <i data-lucide="radio" class="w-5 h-5"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600">แดนซ์</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- 4. Main Search Box Section -->
+        <section id="searchSection" class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="flex flex-col md:flex-row gap-3">
+                <div class="relative flex-1">
+                    <i data-lucide="search" class="w-5 h-5 text-orange-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                    <input id="searchInput" type="text" placeholder="พิมพ์ท่อนเนื้อเพลง หรือชื่อศิลปิน..." 
+                           class="w-full pl-12 pr-4 py-3.5 border-2 border-orange-400 rounded-full focus:outline-none focus:border-orange-600 text-sm">
+                </div>
+                <div class="flex gap-2">
+                    <select id="searchMode" class="border-2 border-gray-200 px-4 py-3 rounded-full text-xs font-semibold bg-gray-50 focus:outline-none focus:border-orange-400">
+                        <option value="lyrics">ค้นจากเนื้อเพลง (IR)</option>
+                        <option value="artist">ค้นจากชื่อศิลปิน</option>
+                    </select>
+                    <button onclick="doSearch()" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-full flex items-center gap-2 transition text-sm">
+                        <i data-lucide="search" class="w-4 h-4"></i> ค้นหา
+                    </button>
+                </div>
+            </div>
+
+            <!-- Suggested Keyword Tags -->
+            <div class="flex flex-wrap items-center gap-2 text-xs text-gray-500 pt-1">
+                <span>คำค้นแนะนำ:</span>
+                <button onclick="setKeyword('คิดถึงใคร')" class="px-3 py-1 bg-gray-100 hover:bg-orange-100 hover:text-orange-600 rounded-full border border-gray-200">คิดถึงใคร</button>
+                <button onclick="setKeyword('ให้ฉันได้พิง')" class="px-3 py-1 bg-gray-100 hover:bg-orange-100 hover:text-orange-600 rounded-full border border-gray-200">ให้ฉันได้พิง</button>
+                <button onclick="setKeyword('โต๊ะริม')" class="px-3 py-1 bg-gray-100 hover:bg-orange-100 hover:text-orange-600 rounded-full border border-gray-200">โต๊ะริม</button>
+                <button onclick="setKeyword('NONT TANONT')" class="px-3 py-1 bg-gray-100 hover:bg-orange-100 hover:text-orange-600 rounded-full border border-gray-200">NONT TANONT</button>
+            </div>
+        </section>
+
+        <!-- 5. Promo Card -->
+        <section class="bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-3xl p-6 flex justify-between items-center shadow-lg">
+            <div class="space-y-2">
+                <span class="bg-white/20 text-xs px-3 py-1 rounded-full uppercase tracking-wider font-semibold">แนะนำการใช้งาน</span>
+                <h3 class="text-xl md:text-2xl font-bold">พิมพ์เนื้อเพลงเพียงไม่กี่คำ เพื่อหาชื่อเพลงและศิลปิน</h3>
+            </div>
+            <div class="hidden md:block p-4 bg-white/10 rounded-2xl">
+                <i data-lucide="disc" class="w-10 h-10 text-white"></i>
+            </div>
+        </section>
+
+        <!-- 6. Results Section -->
+        <section>
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-800">ผลการค้นหา</h2>
+                    <p id="resultCount" class="text-xs text-gray-500">พร้อมประมวลผลด้วยอัลกอริทึม TF-IDF</p>
+                </div>
+            </div>
+
+            <!-- Results Grid Container -->
+            <div id="results" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="col-span-full text-center py-12 text-gray-400 bg-white rounded-3xl border border-dashed border-gray-300">
+                    <i data-lucide="music-2" class="w-12 h-12 mx-auto mb-3 opacity-40"></i>
+                    <p>พิมพ์เนื้อเพลงหรือชื่อนักร้องด้านบนเพื่อเริ่มค้นหา</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        function setKeyword(text) {
+            document.getElementById('searchInput').value = text;
+            document.getElementById('searchMode').value = 'lyrics';
+            doSearch();
+        }
+
+        function quickSearch(text) {
+            document.getElementById('searchInput').value = text;
+            document.getElementById('searchMode').value = 'lyrics';
+            doSearch();
+        }
+
+        async function doSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            const mode = document.getElementById('searchMode').value;
+            const resultsDiv = document.getElementById('results');
+            const resultCount = document.getElementById('resultCount');
+
+            if (!query) return;
+
+            resultsDiv.innerHTML = `
+                <div class="col-span-full text-center py-12 text-orange-500">
+                    <i data-lucide="loader-2" class="w-8 h-8 mx-auto animate-spin mb-2"></i>
+                    <p class="text-sm font-medium">กำลังค้นหาข้อมูลเพลงผ่านระบบ IR...</p>
+                </div>
+            `;
+            lucide.createIcons();
+
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/search?q=${encodeURIComponent(query)}&mode=${mode}`);
+                const data = await response.json();
+
+                resultsDiv.innerHTML = '';
+                resultCount.innerText = `พบผลลัพธ์ทั้งหมด ${data.results.length} รายการ`;
+
+                if (data.results.length === 0) {
+                    resultsDiv.innerHTML = `
+                        <div class="col-span-full text-center py-12 text-red-500 bg-white rounded-3xl border border-gray-200">
+                            <i data-lucide="alert-circle" class="w-10 h-10 mx-auto mb-2"></i>
+                            <p>ไม่พบเพลงหรือศิลปินที่ตรงกับคำค้นหาของคุณ</p>
+                        </div>
+                    `;
+                    lucide.createIcons();
+                    return;
+                }
+
+                data.results.forEach((item) => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between';
+
+                    const scorePercent = item.score ? Math.min(Math.round(item.score * 100), 100) : 100;
+
+                    card.innerHTML = `
+                        <div>
+                            <div class="relative h-44 bg-slate-800 overflow-hidden flex items-center justify-center">
+                                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" 
+                                     alt="Cover" class="w-full h-full object-cover opacity-60">
+                                <span class="absolute top-3 left-3 bg-orange-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
+                                    ${item.score ? 'IR Match' : 'Artist Match'}
+                                </span>
+                                ${item.score ? `
+                                    <span class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-orange-400 text-[11px] font-semibold px-2.5 py-1 rounded-full">
+                                        Score: ${item.score}
+                                    </span>
+                                ` : ''}
+                            </div>
+
+                            <div class="p-5 space-y-3">
+                                <div>
+                                    <h3 class="font-bold text-lg text-gray-900 leading-snug">${item.title}</h3>
+                                    <p class="text-xs font-semibold text-orange-500 uppercase tracking-wide mt-0.5">${item.artist}</p>
+                                </div>
+
+                                <div class="bg-gray-50 p-3 rounded-2xl border border-gray-100 text-xs text-gray-600 space-y-1">
+                                    <span class="font-medium text-gray-400 text-[10px]">ท่อนเนื้อเพลง:</span>
+                                    <p class="italic font-normal text-gray-700">"${item.lyrics}"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="px-5 pb-5 pt-2 border-t border-gray-50 space-y-2">
+                            <div class="flex justify-between text-[11px] text-gray-400">
+                                <span>ความสอดคล้อง (Relevance)</span>
+                                <span class="font-bold text-gray-600">${scorePercent}%</span>
+                            </div>
+                            <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                                <div class="bg-orange-500 h-full rounded-full" style="width: ${scorePercent}%"></div>
+                            </div>
+                        </div>
+                    `;
+                    resultsDiv.appendChild(card);
+                });
+
+                lucide.createIcons();
+
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-red-500 bg-white rounded-3xl border border-gray-200">
+                        <i data-lucide="wifi-off" class="w-10 h-10 mx-auto mb-2"></i>
+                        <p>ไม่สามารถเชื่อมต่อกับระบบ Backend ได้ (โปรดตรวจสอบว่าได้รัน uvicorn ใน VS Code หรือยัง)</p>
+                    </div>
+                `;
+                lucide.createIcons();
+            }
+        }
+    </script>
+</body>
+</html>
